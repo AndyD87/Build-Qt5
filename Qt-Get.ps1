@@ -9,24 +9,24 @@
     [bool]$Static = $false
 )
 Import-Module "$PSScriptRoot\Common\Perl.ps1"
+Import-Module "$PSScriptRoot\Common\Process.ps1"
 Perl-GetEnv -Mandatory
 
 $CurrentDir = ((Get-Item -Path ".\" -Verbose).FullName)
 
-git clone git://code.qt.io/qt/qt5.git $QtDir
+Process-StartInlineAndThrow "git" "clone git://code.qt.io/qt/qt5.git $QtDir"
 
 cd $QtDir
 
 if([string]::IsNullOrEmpty($Version) -ne $false)
 {
-    git checkout v$Version
-    if($LASTEXITCODE -ne 0)
+    if((Process-StartInline "git" "checkout v$Version") -ne 0)
     {
         throw "Failed: git checkout v$Version"
     }
 }
-perl init-repository
-if($LASTEXITCODE -ne 0)
+
+if((Process-StartInline "git" "init-repository") -ne 0)
 {
     throw "Failed: perl init-repository"
 }
