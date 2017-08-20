@@ -26,7 +26,7 @@ if([string]::IsNullOrEmpty($Version) -ne $false)
     }
 }
 
-if((Process-StartInline "git" "init-repository") -ne 0)
+if((Process-StartInline "perl" "init-repository") -ne 0)
 {
     throw "Failed: perl init-repository"
 }
