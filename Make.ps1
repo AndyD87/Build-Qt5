@@ -15,10 +15,11 @@ PARAM(
     [string]$AdditionalConfig = "",
 
     [bool]$NoClean = $false,
-    [bool]$BuildICU,
+    [bool]$BuildICU = $false,
     [string]$IcuDir = "",
-    [bool]$BuildOpenssl,
-    [string]$OpensslDir = ""
+    [bool]$BuildOpenssl = $false,
+    [string]$OpensslDir = "",
+    [string]$OverrideOutput = ""
 )
 # Include Common Powershell modules
 Import-Module "$PSScriptRoot\Common\All.ps1" -Force

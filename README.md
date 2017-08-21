@@ -64,6 +64,17 @@ If other features are required, please let me know.
 
 Contact me here on github, on my [Webpage](https://adirmeier.de) or per mail *coolcow_ccos[at]yahoo.com* 
     
+## Output Format
+
+The name of the output folder will be generated as follows:
+
+    qt5-$Version-$VisualStudioYear-$Architecture[_static][_debug][_MT]
+
+Conditions for Postfixes:
+ - **_static**: will be set if *-Static* is enabled
+ - **_debug**: will be set if *-DebugBuild* is enabled
+ - **_MT**: will be set if *-StaticRuntime* is enabled
+
 ## Tested Configurations  
  
 I have not the ressources to test several configurations.  
