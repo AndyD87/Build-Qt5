@@ -16,13 +16,13 @@ Mandatory Requirements:
  - Cygwin (if ICU required)
 
 Recommended Requirements:
- - Python 2.7: Required for Webengine/ICU
+ - Python 2.7: Required for Webengine/ICU  
     Common Tools will download a Portable Version of WinPython if not available
- - Perl: Required for OpenSSL/ICU
+ - Perl: Required for OpenSSL/ICU  
     Common Scripts will download a Portable Version of StrawberryPerl if not available
- - Subversion: Required for ICU
+ - Subversion: Required for ICU  
     Common Scripts will download a Portable Version of Subversion if not available
- - NASM: Required for OpenSSL
+ - NASM: Required for OpenSSL  
     Common Scripts will download a Portable Version of NASM if not available
 
 ## How to build
