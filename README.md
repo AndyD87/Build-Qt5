@@ -9,11 +9,21 @@ If something goes wrong feel free to debug with *Powershell ISE* or write a Mess
 
 ## Requirements
 
+Mandatory Requirements:
+ - Git
  - Visual Studio 2013/2015/2017
- - Python
- - Cmake (for creating zip)
- - Perl (Openssl)
- - NASM (Openssl)
+ - Cmake (for working with Zip-Files)
+ - Cygwin (if ICU required)
+
+Recommended Requirements:
+ - Python 2.7: Required for Webengine/ICU
+    Common Tools will download a Portable Version of WinPython if not available
+ - Perl: Required for OpenSSL/ICU
+    Common Scripts will download a Portable Version of StrawberryPerl if not available
+ - Subversion: Required for ICU
+    Common Scripts will download a Portable Version of Subversion if not available
+ - NASM: Required for OpenSSL
+    Common Scripts will download a Portable Version of NASM if not available
 
 ## How to build
 
@@ -26,7 +36,7 @@ Default Options (bold are mandatory):
  - **Architectrue**: x64/x86
  - **Version**: Version of Qt
  - Static: $true/$false (default: $false)
- - Debug: $true/$false (default: $false)
+ - Debug: $true/$false (default: $false) <-- Currently not working, -debug-and-release is hardcoded
  - DoPackage: $true/$false (default: $false) for creating zip of output
  - AdditionalConfig: String to append on configure command (default: "")
  
@@ -62,6 +72,7 @@ Here a list of configurations wich was successfully build:
 
 - Qt5 build with Visual Studio 2017:
 
+    # Build Qt5.8 with all ICU for Webkit and Webengine + OpenSSL
     .\Make.ps1 -VisualStudio 2017 -Architecture x64 -Version 5.8.0 -BuildICU $true -BuildOpenSSL $true
 
 List will grow for every new build Qt5
