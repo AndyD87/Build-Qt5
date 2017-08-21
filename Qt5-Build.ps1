@@ -8,6 +8,8 @@ PARAM(
     [Parameter(Mandatory=$false, Position=4)]
     [bool]$DebugBuild = $false,
     [Parameter(Mandatory=$false, Position=5)]
+    [bool]$StaticRuntime = $false,
+    [Parameter(Mandatory=$false, Position=6)]
     [string]$AdditionalConfig = "",
 
     [string]$IcuDir,
@@ -29,7 +31,12 @@ if($OutputTarget -ne "")
 
 if($Static)
 {
-    $Config += "-static -static-runtime "
+    $Config += "-static "
+}
+
+if($StaticRuntime)
+{
+    $Config += "-static-runtime "
 }
 
 ###############################################################################
@@ -48,12 +55,19 @@ if(-not [string]::IsNullOrEmpty($OpenSslDir))
 ###############################################################################
 if(-not [string]::IsNullOrEmpty($IcuDir))
 {
-    $env:INCLUDE = $env:INCLUDE+ ";$IcuDir\include"
-    $env:LIB     = $env:LIB    + ";$IcuDir\lib"
-    $env:LIB     = $env:LIB    + ";$IcuDir\bin"
-    $env:PATH    = $env:PATH   + ";$IcuDir\bin"
-    $env:PATH    = $env:PATH   + ";$IcuDir\lib"
-    $Config += "-icu -I $IcuDir\include -L $IcuDir\lib "
+    if($Static)
+    {
+        throw "Static ICU is not working on static Qt build"
+    }
+    else
+    {
+        $env:INCLUDE = $env:INCLUDE+ ";$IcuDir\include"
+        $env:LIB     = $env:LIB    + ";$IcuDir\lib"
+        $env:LIB     = $env:LIB    + ";$IcuDir\bin"
+        $env:PATH    = $env:PATH   + ";$IcuDir\bin"
+        $env:PATH    = $env:PATH   + ";$IcuDir\lib"
+        $Config += "-icu -I $IcuDir\include -L $IcuDir\lib "
+    }
 }
 
 $Config += $AdditionalConfig
@@ -65,7 +79,7 @@ cd $QtDir
 Write-Output "******************************"
 Write-Output "* Start Configuration"
 Write-Output "******************************"
-Process-StartInlineAndThrow "cmd" "/C configure.bat $Config"
+Process-StartInlineAndThrow "cmd.exe" "/C configure.bat $Config"
 
 Write-Output "******************************"
 Write-Output "* Start Build"

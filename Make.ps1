@@ -10,6 +10,8 @@ PARAM(
     [Parameter(Mandatory=$false, Position=5)]
     [bool]$DebugBuild = $false,
     [Parameter(Mandatory=$false, Position=6)]
+    [bool]$StaticRuntime = $false,
+    [Parameter(Mandatory=$false, Position=7)]
     [string]$AdditionalConfig = "",
 
     [bool]$NoClean = $false,
@@ -25,21 +27,37 @@ Write-Output "******************************"
 Write-Output "* Start Qt Build"
 Write-Output "******************************"
 
-$VisualStudioVersionString = "${VisualStudio}-${Architecture}"
-if($Static)
-{
-    $VisualStudioVersionString += "_static"
-}
-if($DebugBuild)
-{
-    $VisualStudioVersionString += "_debug"
-}
-
 $ExitCode       = 0
 $CurrentDir     = (Get-Item -Path ".\" -Verbose).FullName
-$OutputName     = "qt-$Version-$VisualStudioVersionString"
+$OutputName     = "qt5-$Version-${VisualStudio}-${Architecture}"
 $Output         = "$CurrentDir\$OutputName"
-$QtDir          = "$PSScriptRoot\qt-$Version"
+$QtDir          = "$PSScriptRoot\qt5-$Version"
+
+if([string]::IsNullOrEmpty($OverrideOutput))
+{
+    $Output         = "$CurrentDir\$OutputName"
+    if($Static)
+    {
+        $Output += "_static"
+        $OutputName += "_static"
+    }
+
+    if($DebugBuild)
+    {
+        $Output += "_debug"
+        $OutputName += "_debug"
+    }
+
+    if($StaticRuntime)
+    {
+        $Output += "_MT"
+        $OutputName += "_MT"
+    }
+}
+else
+{
+    $Output     = $OverrideOutput
+}
 
 cd $PSScriptRoot
 
@@ -48,32 +66,34 @@ Try
     if($BuildOpenssl)
     {
         $OpensslDir = $Output
-        .\Qt-Openssl.ps1 $Version $OpensslDir $VisualStudio $Architecture $Static -NoClean $NoClean
+        .\Qt5-Openssl.ps1 $Version $OpensslDir $VisualStudio $Architecture $Static -StaticRuntime $StaticRuntime -NoClean $NoClean
     }
     if($BuildICU)
     {
         $IcuDir = $Output
-        .\Qt-Icu.ps1 $Version $IcuDir $VisualStudio $Architecture $Static -NoClean $NoClean
+        .\Qt5-Icu.ps1 $Version $IcuDir $VisualStudio $Architecture $Static -StaticRuntime $StaticRuntime -NoClean $NoClean
     }
     Write-Output "******************************"
     if( (Test-Path $QtDir) -eq $false )
     {
         Write-Output "* Download Qt $Version"
-        .\Qt-Get.ps1 $QtDir $Version -OutputTarget $Output
+        Write-Output "******************************"
+        .\Qt5-Get.ps1 $QtDir $Version -OutputTarget $Output
     }
     elseif ($NoClean -eq $false)
     {
         Write-Output "* Cleanup Qt"
-        .\Qt-Clean.ps1 $QtDir
+        Write-Output "******************************"
+        .\Qt5-Clean.ps1 $QtDir
     }
     else
     {
         Write-Output "* NoClean"
+        Write-Output "******************************"
     }
-    Write-Output "******************************"
 
     VisualStudio-GetEnv $VisualStudio $Architecture
-    .\Qt-Build.ps1 $QtDir $Output $Static $DebugBuild $AdditionalConfig -OpenSslDir $OpensslDir -IcuDir $IcuDir
+    .\Qt5-Build.ps1 $QtDir $Output $Static $DebugBuild $AdditionalConfig -StaticRuntime $StaticRuntime -OpenSslDir $OpensslDir -IcuDir $IcuDir
     Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
 }
 Catch
