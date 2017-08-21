@@ -9,6 +9,8 @@ PARAM(
     [string]$Architecture,
     [Parameter(Mandatory=$false, Position=5)]
     [bool]$Static = $false,
+    [Parameter(Mandatory=$false, Position=6)]
+    [bool]$StaticRuntime = $false,
     [bool]$NoClean = $false
 )
 Import-Module "$PSScriptRoot\Common\Process.ps1"
@@ -32,12 +34,17 @@ Function CreateMakeSession
     {
         $sStatic = "1";
     }
+    $sStaticRuntime = "0"
+    if($StaticRuntime)
+    {
+        $sStaticRuntime = "1";
+    }
     $sNoClean = "0"
     if($NoClean)
     {
         $sNoClean = "1";
     }
-    $Cmd = "-command .\Make.ps1 -Version `"$Version`" -VisualStudio `"$VisualStudio`" -Architecture `"$Architecture`" -Static $sStatic -OverrideOutput `"$OverrideDir`" -NoClean $sNoClean "
+    $Cmd = "-command .\Make.ps1 -Version `"$Version`" -VisualStudio `"$VisualStudio`" -Architecture `"$Architecture`" -Static $sStatic -StaticRuntime $sStaticRuntime -OverrideOutput `"$OverrideDir`" -NoClean $sNoClean "
     $Exitcode  = Process-StartInline "powershell.exe" -Arguments $Cmd
     if($ExitCode -ne 0)
     {
