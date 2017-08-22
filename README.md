@@ -84,8 +84,10 @@ Here a list of configurations wich was successfully build:
 
 ### Qt5 build with Visual Studio 2017:
 
-    # Build Qt5.6.2 with ICU for Webkit and Webengine + OpenSSL
+    # Build Qt5.6.2 with ICU for Webkit and Webengine + OpenSSL (x64)
     .\Make.ps1 -VisualStudio 2017 -Architecture x64 -Version 5.6.2 -BuildICU $true -BuildOpenSSL $true
+    # Build Qt5.6.2 with ICU for Webkit and Webengine + OpenSSL (x86)
+    .\Make.ps1 -VisualStudio 2017 -Architecture x86 -Version 5.6.2 -BuildICU $true -BuildOpenSSL $true
     #
     # Build Qt5.8 with ICU for Webkit and Webengine + OpenSSL
     .\Make.ps1 -VisualStudio 2017 -Architecture x64 -Version 5.8.0 -BuildICU $true -BuildOpenSSL $true
