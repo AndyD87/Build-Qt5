@@ -84,11 +84,11 @@ Here a list of configurations wich was successfully build:
 
 - Qt5 build with Visual Studio 2017:
 
-    # Build Qt5.8 with all ICU for Webkit and Webengine + OpenSSL
+    \# Build Qt5.8 with all ICU for Webkit and Webengine + OpenSSL
     .\Make.ps1 -VisualStudio 2017 -Architecture x64 -Version 5.8.0 -BuildICU $true -BuildOpenSSL $true
-    # Build Qt5.9.1 static + some interruptens and restart with NoClean
+    \# Build Qt5.9.1 static + some interruptens and restart with NoClean
     .\Make.ps1 2017 x64 5.9.1 -Static $true -NoClean $true
-    # 32bit with OpenSsl and Static
+    \# 32bit with OpenSsl and Static
     .\Make.ps1 2017 x86 5.9.1 -BuildOpenssl $true -Static $true -StaticRuntim $true 
     
 List will grow for every new build Qt5
