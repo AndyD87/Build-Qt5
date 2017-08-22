@@ -42,9 +42,9 @@ Default Options (bold are mandatory):
  - AdditionalConfig: String to append on configure command (default: "")
  
 Addtional Options and Features:
- - BuildQt5 $true/$false (default: $false)
+ - BuildQt5 $true/$false (default: $false)  
    Qt5 will be autmatic downloaded, build and integrated in Qt
- - BuildICU $true/$false (default: $false)
+ - BuildICU $true/$false (default: $false)  
    ICU will be autmatic downloaded, build and integrated in Qt
    
 If different configurations are required to pass to configure.bat, use 
@@ -82,7 +82,7 @@ It would be nice if you would feedback me, if configurations work or fail.
   
 Here a list of configurations wich was successfully build:
 
-- Qt5 build with Visual Studio 2017:
+### Qt5 build with Visual Studio 2017:
 
     # Build Qt5.8 with all ICU for Webkit and Webengine + OpenSSL
     .\Make.ps1 -VisualStudio 2017 -Architecture x64 -Version 5.8.0 -BuildICU $true -BuildOpenSSL $true
