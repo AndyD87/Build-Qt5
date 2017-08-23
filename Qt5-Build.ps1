@@ -41,7 +41,6 @@ PARAM(
 )
 
 Python-GetEnv 2.7 -Mandatory
-Ninja-GetEnv
 # Qt base uses Perl scripts
 Perl-GetEnv -Mandatory
 
@@ -57,11 +56,18 @@ if($OutputTarget -ne "")
 if($Static)
 {
     $Config += "-static "
-}
 
-if($StaticRuntime)
+    if($StaticRuntime)
+    {
+        $Config += "-static-runtime "
+    }
+}
+else
 {
-    $Config += "-static-runtime "
+    if($StaticRuntime)
+    {
+        $Config += "Qt requires -static for -static-runtime"
+    }
 }
 
 ###############################################################################

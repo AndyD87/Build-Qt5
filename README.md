@@ -96,5 +96,10 @@ Here a list of configurations wich was successfully build:
     .\Make.ps1 2017 x64 5.9.1 -Static $true -NoClean $true
     # 32bit with OpenSsl and Static
     .\Make.ps1 2017 x86 5.9.1 -BuildOpenssl $true -Static $true -StaticRuntim $true 
+
+### Qt5 build with Visual Studio 2015:
+
+    # Build Qt5.6.2 with ICU for Webkit and Webengine + OpenSSL (x64)
+    .\Make.ps1 2015 x64 5.6.2.1 -BuildICU $true -BuildOpenssl $true
     
 List will grow for every new build Qt5
