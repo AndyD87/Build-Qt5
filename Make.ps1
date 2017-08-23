@@ -54,30 +54,15 @@ Write-Output "******************************"
 
 $ExitCode       = 0
 $CurrentDir     = (Get-Item -Path ".\" -Verbose).FullName
-$OutputName     = "qt5-$Version-${VisualStudio}-${Architecture}"
+$OutputName     = "qt5-$Version"
 $Output         = "$CurrentDir\$OutputName"
-$QtDir          = "$PSScriptRoot\qt5-$Version"
+$QtDir          = "$PSScriptRoot\$OutputName"
 
 if([string]::IsNullOrEmpty($OverrideOutput))
 {
-    $Output         = "$CurrentDir\$OutputName"
-    if($Static)
-    {
-        $Output += "_static"
-        $OutputName += "_static"
-    }
-
-    if($DebugBuild)
-    {
-        $Output += "_debug"
-        $OutputName += "_debug"
-    }
-
-    if($StaticRuntime)
-    {
-        $Output += "_MT"
-        $OutputName += "_MT"
-    }
+    $VisualStudioPostFix = VisualStudio-GetPostFix -VisualStudio $VisualStudio -Architecture $Architecture -Static $Static -DebugBuild $DebugBuild -StaticRuntime $StaticRuntime
+    $OutputName += "-$VisualStudioPostFix"
+    $Output     =  "$CurrentDir\$OutputName"
 }
 else
 {
