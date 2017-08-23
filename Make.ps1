@@ -38,6 +38,7 @@ PARAM(
     [Parameter(Mandatory=$false, Position=7)]
     [string]$AdditionalConfig = "",
 
+    [bool]$DoPackage = $false,
     [bool]$NoClean = $false,
     [bool]$BuildICU = $false,
     [string]$IcuDir = "",
@@ -104,6 +105,10 @@ Try
 
     VisualStudio-GetEnv $VisualStudio $Architecture
     .\Qt5-Build.ps1 $QtDir $Output $Static $DebugBuild $AdditionalConfig -StaticRuntime $StaticRuntime -OpenSslDir $OpensslDir -IcuDir $IcuDir
+    if($DoPackage)
+    {
+        Compress-Zip -OutputFile "$Output.zip" -Single $Output
+    }
     Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
 }
 Catch
