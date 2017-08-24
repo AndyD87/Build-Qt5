@@ -5,15 +5,20 @@ Sources will be downloaded from original repository on git://code.qt.io/qt/qt5.g
 
 Primarily this script was created for my BuildSystem wich is described [here](https://adirmeier.de/0_Blog/ID_157/index.html).  
 This scripts should work on other systems too.  
-If something goes wrong feel free to debug with *Powershell ISE* or write a Message.
+
+Since this Version, there are only two major requirements to get this build working.  
+All other tools, wich are required for build, will be downloaded automatically and set 
+to PATH for building.  
+The download will only happen if Scripts wasn't able to find a local Version of this tools.
+So it is still recommended to install it on your system.
+
+If error will occur you can use *Powershell ISE* for debugging, or contact me.
 
 ## Requirements
 
 Mandatory Requirements:
- - Git
+ - Powershell Version >= 3.0
  - Visual Studio 2013/2015/2017
- - Cmake (for working with Zip-Files)
- - Cygwin (if ICU required)
 
 Recommended Requirements:
  - Python 2.7: Required for Webengine/ICU  
@@ -24,6 +29,10 @@ Recommended Requirements:
     Common Scripts will download a Portable Version of Subversion if not available
  - NASM: Required for OpenSSL  
     Common Scripts will download a Portable Version of NASM if not available
+ - Git
+    Common Scripts will download a Portable Version of Git if not available
+ - Cygwin (if ICU required)
+    Common Scripts will download a Portable Version of Cygwin if not available
 
 ## How to build
 

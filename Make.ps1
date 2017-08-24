@@ -107,7 +107,7 @@ Try
     .\Qt5-Build.ps1 $QtDir $Output $Static $DebugBuild $AdditionalConfig -StaticRuntime $StaticRuntime -OpenSslDir $OpensslDir -IcuDir $IcuDir
     if($DoPackage)
     {
-        Compress-Zip -OutputFile "$Output.zip" -Single $Output
+        Compress-Zip -OutputFile "$Output.7z" -Single $Output
     }
     Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
 }
