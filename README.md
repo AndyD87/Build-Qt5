@@ -51,8 +51,8 @@ Default Options (bold are mandatory):
  - AdditionalConfig: String to append on configure command (default: "")
  
 Addtional Options and Features:
- - BuildQt5 $true/$false (default: $false)  
-   Qt5 will be autmatic downloaded, build and integrated in Qt
+ - BuildOpenssl $true/$false (default: $false)  
+   OpenSSL will be autmatic downloaded, build and integrated in Qt
  - BuildICU $true/$false (default: $false)  
    ICU will be autmatic downloaded, build and integrated in Qt
    
