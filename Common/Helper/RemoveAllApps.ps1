@@ -1,4 +1,4 @@
-##
+﻿##
 # This file is part of Powershell-Common, a collection of powershell-scrips
 # 
 # Copyright (c) 2017 Andreas Dirmeier
@@ -22,16 +22,24 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ##
-$Scripts = Get-ChildItem $PSScriptRoot -Exclude All.ps1,UpdateCommon.ps1
+<#
+.SYNOPSIS
+    Uninstall all non microsoft apps.
+.DESCRIPTION
+    This script can be executed on a fresh installed windows to remove all default apps.
+#>
 
-foreach($Script in $Scripts)
+$Packages = Get-AppPackage
+foreach($Package in $Packages)
 {
-    if($Script.Name.EndsWith(".ps1"))
+    if($Package.NonRemovable)
     {
-        Import-Module $Script -Force
     }
     else
     {
-        Write-Verbose ("Skipped module " + $Script.Name)
+        if($Package.Name.StartsWith("Microsoft") -ne $true)
+        {
+            Remove-AppPackage $Package
+        }
     }
 }
