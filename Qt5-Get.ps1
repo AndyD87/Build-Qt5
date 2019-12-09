@@ -32,9 +32,9 @@ PARAM(
     [Parameter(Mandatory=$false, Position=4)]
     [bool]$Static = $false
 )
-Import-Module "$PSScriptRoot\Common\Process.ps1"
-Import-Module "$PSScriptRoot\Common\Perl.ps1"
-Import-Module "$PSScriptRoot\Common\Git.ps1"
+Import-Module "$PSScriptRoot\Common\Process.ps1" -Force
+Import-Module "$PSScriptRoot\Common\Perl.ps1" -Force
+Import-Module "$PSScriptRoot\Common\Git.ps1" -Force
 
 Git-GetEnv -Mandatory
 Perl-GetEnv -Mandatory

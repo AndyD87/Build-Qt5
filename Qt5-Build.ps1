@@ -40,6 +40,11 @@ PARAM(
     [string]$OpenSslDir
 )
 
+Import-Module "$PSScriptRoot\Common\Perl.ps1" -Force
+Import-Module "$PSScriptRoot\Common\Python.ps1" -Force
+Import-Module "$PSScriptRoot\Common\WinFlexBison.ps1" -Force
+
+WinFlexBison-GetEnv -Mandatory
 Python-GetEnv 2.7 -Mandatory
 # Qt base uses Perl scripts
 Perl-GetEnv -Mandatory
@@ -66,7 +71,8 @@ else
 {
     if($StaticRuntime)
     {
-        $Config += "Qt requires -static for -static-runtime"
+        $Config += "-static-runtime "
+        #throw "Qt requires -static for -static-runtime"
     }
 }
 
@@ -110,7 +116,13 @@ cd $QtDir
 Write-Output "******************************"
 Write-Output "* Start Configuration"
 Write-Output "******************************"
-Process-StartInlineAndThrow "cmd.exe" "/C configure.bat $Config"
+try
+{
+    Process-StartInlineAndThrow "cmd.exe" "/C configure.bat $Config"
+}
+catch
+{
+}
 
 Write-Output "******************************"
 Write-Output "* Start Build"
