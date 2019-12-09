@@ -71,8 +71,7 @@ else
 {
     if($StaticRuntime)
     {
-        $Config += "-static-runtime "
-        #throw "Qt requires -static for -static-runtime"
+        throw "Qt requires -static for -static-runtime"
     }
 }
 
@@ -116,12 +115,12 @@ cd $QtDir
 Write-Output "******************************"
 Write-Output "* Start Configuration"
 Write-Output "******************************"
-try
+$iExitCode = Process-StartInline "cmd.exe" "/C configure.bat $Config"
+if( $iExitCode -ne 1 -and 
+    $iExitCode -ne 0
+)
 {
-    Process-StartInlineAndThrow "cmd.exe" "/C configure.bat $Config"
-}
-catch
-{
+    throw "Configure failed with: configure.bat $Config"
 }
 
 Write-Output "******************************"
