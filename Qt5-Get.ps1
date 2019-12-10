@@ -47,7 +47,7 @@ cd $QtDir
 
 if([string]::IsNullOrEmpty($Version) -ne $false)
 {
-    Git-Checkout $QtDir "checkout v$Version"
+    Git-Checkout $QtDir "v$Version"
 }
 
 if((Process-StartInline "perl" "init-repository") -ne 0)
