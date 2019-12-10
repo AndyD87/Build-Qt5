@@ -45,7 +45,7 @@ Git-Clone "git://code.qt.io/qt/qt5.git" $QtDir
 
 cd $QtDir
 
-if([string]::IsNullOrEmpty($Version) -ne $false)
+if([string]::IsNullOrEmpty($Version) -eq $false)
 {
     Git-Checkout $QtDir "v$Version"
 }

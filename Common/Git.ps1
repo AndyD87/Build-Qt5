@@ -140,7 +140,7 @@ Function Git-Checkout
 
     cd $Target
 
-    Git-Execute "checkout `"$Source`""
+    Git-Execute "checkout `"$Checkout`""
 
     cd $CurrentDir
 }
