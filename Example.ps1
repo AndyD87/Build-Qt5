@@ -9,7 +9,7 @@ $Static        = $false
 $StaticRuntime = $false
 $DebugToo      = $true
 
-Set-Content "Log.txt" ""
+Set-Content "Build.log" ""
 
 foreach($VisualStudio in $VisualStudios)
 {
@@ -18,22 +18,22 @@ foreach($VisualStudio in $VisualStudios)
         .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime
         if($LASTEXITCODE -eq 0)
         {
-            Add-Content "Log.txt" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
+            Add-Content "Build.log" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
         }
         else
         {
-            Add-Content "Log.txt" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
+            Add-Content "Build.log" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
         }
         if($DebugToo)
         {
             .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true
             if($LASTEXITCODE -eq 0)
             {
-                Add-Content "Log.txt" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
+                Add-Content "Build.log" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
             }
             else
             {
-                Add-Content "Log.txt" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
+                Add-Content "Build.log" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
             }
         }
     }
