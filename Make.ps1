@@ -110,6 +110,26 @@ Try
         Compress-Zip -OutputFile "$Output.7z" -Single $Output
     }
     Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
+    
+    $sCommit = git rev-parse HEAD
+    $OutputLog = $Output + "/Build.log"
+    Set-Content $OutputLog "Qt was build with Tools from https://github.com/AndyD87/Build-Qt5.git"
+    Add-Content $OutputLog "  Current Commit: $sCommit"
+    Add-Content $OutputLog " "
+    Add-Content $OutputLog "Make Paramters"
+    Add-Content $OutputLog "  [string]VisualStudio     = $VisualStudio      "
+    Add-Content $OutputLog "  [string]Architecture     = $Architecture      "
+    Add-Content $OutputLog "  [string]Version          = $Version           "
+    Add-Content $OutputLog "  [bool]  DebugBuild       = $DebugBuild        "
+    Add-Content $OutputLog "  [bool]  StaticRuntime    = $StaticRuntime     "
+    Add-Content $OutputLog "  [string]AdditionalConfig = $AdditionalConfig  "
+    Add-Content $OutputLog "  [bool]  DoPackage        = $DoPackage         "
+    Add-Content $OutputLog "  [bool]  NoClean          = $NoClean           "
+    Add-Content $OutputLog "  [bool]  BuildICU         = $BuildICU          "
+    Add-Content $OutputLog "  [string]IcuDir           = $IcuDir            "
+    Add-Content $OutputLog "  [bool]  BuildOpenssl     = $BuildOpenssl      "
+    Add-Content $OutputLog "  [string]OpensslDir       = $OpensslDir        "
+    Add-Content $OutputLog "  [string]OverrideOutput   = $OverrideOutput    "
 }
 Catch
 {
