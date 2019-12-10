@@ -136,6 +136,7 @@ Catch
     $ExitCode       = 1
     Write-Output $_.Exception.Message
     Add-Content "$CurrentDir\Build.log" "Failed: $OutputName"
+    pause
 }
 Finally
 {

@@ -25,17 +25,17 @@ foreach($VisualStudio in $VisualStudios)
         {
             Add-Content "Build.log" "Failed"
         }
-        if($DebugToo)
-        {
-            .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true -DoPackage $DoPackage
-            if($LASTEXITCODE -eq 0)
-            {
-                Add-Content "Build.log" "Succeeded"
-            }
-            else
-            {
-                Add-Content "Build.log" "Failed"
-            }
-        }
+        #if($DebugToo)
+        #{
+        #    .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true -DoPackage $DoPackage
+        #    if($LASTEXITCODE -eq 0)
+        #    {
+        #        Add-Content "Build.log" "Succeeded"
+        #    }
+        #    else
+        #    {
+        #        Add-Content "Build.log" "Failed"
+        #    }
+        #}
     }
 }
