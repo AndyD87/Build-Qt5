@@ -8,6 +8,7 @@ $Architectures = @("x64", "x86")
 $Static        = $false
 $StaticRuntime = $false
 $DebugToo      = $true
+$DoPackage     = $true
 
 Set-Content "Build.log" ""
 
@@ -15,25 +16,25 @@ foreach($VisualStudio in $VisualStudios)
 {
     foreach($Architecture in $Architectures)
     {
-        .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime
+        .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DoPackage $DoPackage
         if($LASTEXITCODE -eq 0)
         {
-            Add-Content "Build.log" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
+            Add-Content "Build.log" "Succeeded"
         }
         else
         {
-            Add-Content "Build.log" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime"
+            Add-Content "Build.log" "Failed"
         }
         if($DebugToo)
         {
-            .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true
+            .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true -DoPackage $DoPackage
             if($LASTEXITCODE -eq 0)
             {
-                Add-Content "Build.log" "Succeeded: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
+                Add-Content "Build.log" "Succeeded"
             }
             else
             {
-                Add-Content "Build.log" "Failed: .\Make.ps1 -VisualStudio $VisualStudio -Version $Version -Architecture $Architecture -Static $Static -StaticRuntime $StaticRuntime -DebugBuild $true"
+                Add-Content "Build.log" "Failed"
             }
         }
     }
