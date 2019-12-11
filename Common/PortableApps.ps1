@@ -118,7 +118,7 @@ Function PortableApp-DownloadAndPath
     else
     {
         # Nothing to download, but PATH is possible not yet set.
-        $env:PATH += ";$PortableAppBinDir"
+        $env:PATH = "$PortableAppBinDir;" + $env:PATH
     }
     if($ReturnPath -eq $true)
     {
