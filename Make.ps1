@@ -105,11 +105,6 @@ Try
 
     VisualStudio-GetEnv $VisualStudio $Architecture
     .\Qt5-Build.ps1 $QtDir $Output $Static $DebugBuild $AdditionalConfig -StaticRuntime $StaticRuntime -OpenSslDir $OpensslDir -IcuDir $IcuDir
-    if($DoPackage)
-    {
-        Compress-Zip -OutputFile "$Output.7z" -Single $Output
-    }
-    Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
     
     $sCommit = git rev-parse HEAD
     $OutputLog = $Output + "/Build.log"
@@ -130,6 +125,14 @@ Try
     Add-Content $OutputLog "  [bool]  BuildOpenssl     = $BuildOpenssl      "
     Add-Content $OutputLog "  [string]OpensslDir       = $OpensslDir        "
     Add-Content $OutputLog "  [string]OverrideOutput   = $OverrideOutput    "
+
+    if($DoPackage)
+    {
+        Compress-Zip -OutputFile "$Output.7z" -Single $Output
+        Remove-Item -Recurse -Force $Output
+    }
+
+    Add-Content "$CurrentDir\Build.log" "Success: $OutputName"
 }
 Catch
 {

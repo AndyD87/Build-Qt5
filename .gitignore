@@ -2,3 +2,5 @@ qt5-*/
 Build.log
 Build-ICU/
 Build-Openssl/
+*.7z
+*.zip
