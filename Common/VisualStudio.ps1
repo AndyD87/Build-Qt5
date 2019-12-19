@@ -201,6 +201,7 @@ Function VisualStudio-YearToMsvcDefine
     $MSVC = "msvc"
     switch($VisualStudio)
     {
+        "2019" { $MSVC += "1920" }
         "2017" { $MSVC += "1910" }
         "2015" { $MSVC += "1900" }
         "2013" { $MSVC += "1800" }

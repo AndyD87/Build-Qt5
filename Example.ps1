@@ -3,7 +3,7 @@
 ###############################################################################
 
 $Version       = "5.13.2"
-$VisualStudios = @("2017", "2015")
+$VisualStudios = @("2015", "2017", "2019")
 $Architectures = @("x64", "x86")
 $Static        = $false
 $StaticRuntime = $false
