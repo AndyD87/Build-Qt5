@@ -142,11 +142,11 @@ Function VisualStudio-GetEnv
                     # Some applications require access to build tools:
                     if(Test-Path "C:\Program Files (x86)\Windows Kits\8.1\bin\x64")
                     {
-                        $env:Path = ";C:\Program Files (x86)\Windows Kits\8.1\bin\x64"
+                        $env:Path = $env:Path + ";C:\Program Files (x86)\Windows Kits\8.1\bin\x64"
                     }
                     elseif(Test-Path "C:\Program Files (x86)\Windows Kits\8.1\bin\x86")
                     {
-                        $env:Path = ";C:\Program Files (x86)\Windows Kits\8.1\bin\x86"
+                        $env:Path = $env:Path + ";C:\Program Files (x86)\Windows Kits\8.1\bin\x86"
                     }
                 }
                 else
