@@ -224,6 +224,54 @@ Function VisualStudio-YearToMsvcDefine
     return $MSVC
 }
 
+Function VisualStudio-GetAvailable
+{
+    $aVisualStudios = @()
+    
+    if(Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2019";
+    }
+    elseif (Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2019";
+    }
+    elseif (Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2019";
+    }
+
+    if(Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2017";
+    }
+    elseif (Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2017";
+    }
+    elseif (Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat")
+    {
+        $aVisualStudios += "2017";
+    }
+
+    if(Test-Path "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat")
+    {
+        $aVisualStudios += "2015";
+    }
+
+    if(Test-Path "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat")
+    {
+        $aVisualStudios += "2013";
+    }
+
+    if(Test-Path "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat")
+    {
+        $aVisualStudios += "2012";
+    }
+
+    return $aVisualStudios
+}
+
 Function VisualStudio-GetPostFix
 {
     PARAM(

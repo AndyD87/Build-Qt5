@@ -1,9 +1,10 @@
 ﻿###############################################################################
 # Example to build many different types of one Version
 ###############################################################################
+Import-Module "$PSScriptRoot\Common\VisualStudio.ps1" -Force
 
 $Version       = "5.15.2"
-$VisualStudios = @("2015", "2017", "2019")
+$VisualStudios = VisualStudio-GetAvailable
 $Architectures = @("x64", "x86")
 $Static        = $false
 $StaticRuntime = $false

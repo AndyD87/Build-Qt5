@@ -28,7 +28,7 @@ foreach($Script in $Scripts)
 {
     if($Script.Name.EndsWith(".ps1"))
     {
-        Import-Module $Script -Force
+        Import-Module $Script.FullName -Force
     }
     else
     {
